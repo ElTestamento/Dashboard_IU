@@ -1,6 +1,7 @@
 # main.py
 # Importiert alle notwendigen Module
 import sys
+import traceback
 from PyQt6.QtWidgets import QApplication
 from logic import StudiumManager
 from data_access import DataAccess

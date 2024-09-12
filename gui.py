@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QPu
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QColor, QPalette
 from entities import AVAILABLE_MODULES
-
+from data_access import DataAccess
 
 class AddStudentDialog(QDialog):
     def __init__(self, parent=None):
@@ -209,6 +209,10 @@ class Dashboard(QMainWindow):
         for i in range(1, 7):
             self.tab_widget.addTab(SemesterTab(i, AVAILABLE_MODULES, self.studium_manager), f"Semester {i}")
 
+        self.exit_button = QPushButton("Beenden")
+        self.exit_button.clicked.connect(self.close_application)
+        layout.addWidget(self.exit_button)
+
     def add_student(self):
         dialog = AddStudentDialog(self)
         if dialog.exec() == QDialog.DialogCode.Accepted:
@@ -272,3 +276,38 @@ class Dashboard(QMainWindow):
             self.study_status_label.setStyleSheet(
                 "background-color: grey; font-weight: bold; color: white; border-radius: 10px;")
             self.progress_bar.setValue(0)
+
+
+# Fügen Sie diese Methode zur Dashboard-Klasse hinzu
+
+    def save_data(self):
+        DataAccess.save_data(self.studium_manager.studenten)
+
+
+# Ändern Sie den Konstruktor der Dashboard-Klasse
+    def __init__(self, studium_manager):
+        super().__init__()
+        self.studium_manager = studium_manager
+        self.setWindowTitle("Studium Monitor")
+        self.setFixedSize(800, 600)
+        self.setStyleSheet("background-color: #E6F3FF;")
+        self.initUI()
+
+    # Verbinde das 'closeEvent' mit der Speichermethode
+        self.closeEvent = self.save_and_close
+    def save_and_close(self, event):
+        self.save_data()
+        event.accept()
+
+
+    def close_application(self):
+        # Speichern der Daten
+        DataAccess.save_data(self.studium_manager.studenten)
+        # Schließen der Anwendung
+        QApplication.instance().quit()
+
+
+# Überschreiben des closeEvent, um sicherzustellen, dass die Daten auch beim Schließen des Fensters gespeichert werden
+    def closeEvent(self, event):
+        self.close_application()
+        event.accept()

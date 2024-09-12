@@ -2,7 +2,6 @@
 
 from entities import Student, Modul, AVAILABLE_MODULES
 
-
 class StudiumManager:
     def __init__(self):
         self.studenten = [] # Liste von Studenten die zu managen sind. Geladen aus der JSON. Gespeichert in der JSON
