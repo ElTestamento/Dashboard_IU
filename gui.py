@@ -128,6 +128,7 @@ class SemesterTab(QWidget):
 
 
 class Dashboard(QMainWindow):
+# Erstellt das Hauptfenster
     def __init__(self, studium_manager):
         super().__init__()
         self.studium_manager = studium_manager
@@ -231,6 +232,7 @@ class Dashboard(QMainWindow):
             self.select_student_combo.addItem(f"{student.vorname} {student.nachname} ({student.matrikelnummer})")
 
     def update_ui(self):
+# Aktualisiere die gesamte Benutzeroberfläche
         if self.studium_manager.current_student:
             student = self.studium_manager.current_student
             self.student_info_label.setText(

@@ -1,9 +1,14 @@
 # data_access.py
+# In dieser Datei ist das Objekte "DataAccess" zur Datenverwaltung gekapselt.
 
 import json
 from entities import Student
 
 class DataAccess:
+# Die save_data-Methode konvertiert jedes Studenten-Objekt in ein Dictionary und speichert die resultierende Liste in einer JSON-Datei.
+# Vorhersehbare Fehler werden in einem Try and Catch Block abgefangen.
+# Die load_data-Methode liest Daten aus einer JSON-Datei, konvertiert sie zurück in Studenten-Objekte
+# Beide Methoden sind als statische Methoden implementiert.
     @staticmethod
     def save_data(studenten, filename='studenten_data.json'):
         """Speichert die Studentendaten in einer JSON-Datei."""
