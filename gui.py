@@ -250,7 +250,7 @@ class Dashboard(QMainWindow):
             self.total_ects_label.setText(f"Gesamt ECTS: {total_ects} / 180")
 
             status = self.studium_manager.get_study_status()
-            self.study_status_label.setText(status.upper())
+            #self.study_status_label.setText(status.upper())
             if status == "grün":
                 self.study_status_label.setStyleSheet(
                     "background-color: #4CAF50; font-weight: bold; color: white; border-radius: 10px;")
